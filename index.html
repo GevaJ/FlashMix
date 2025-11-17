@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>מבזקון ישראלי</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Assistant:wght@400;600&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <button
+      id="theme-toggle"
+      type="button"
+      class="theme-toggle"
+      aria-label="מצב כהה"
+    >
+      🌙
+    </button>
+    <main class="page">
+      <header class="page__header">
+        <div>
+          <p class="page__eyebrow">ynet · וואלה · מעריב</p>
+          <h1>מבזקון ישראלי</h1>
+          <p class="page__subtitle">
+            רשימת המבזקים כפי שהם מתפרסמים ברגע זה בעמודי המבזקים הרשמיים של
+            שלושת האתרים. בלי כתבות עומק – רק הזמן, המקור והכותרת.
+          </p>
+        </div>
+        <div class="controls">
+          <fieldset class="source-filter">
+            <legend>סינון לפי מקור</legend>
+            <label>
+              <input
+                type="checkbox"
+                value="walla"
+                data-source-checkbox
+                checked
+              />
+              וואלה
+            </label>
+            <label>
+              <input
+                type="checkbox"
+                value="ynet"
+                data-source-checkbox
+                checked
+              />
+              ynet
+            </label>
+            <label>
+              <input
+                type="checkbox"
+                value="maariv"
+                data-source-checkbox
+                checked
+              />
+              מעריב
+            </label>
+          </fieldset>
+          <div class="control-buttons">
+            <button id="refresh-btn" class="refresh-btn" type="button">
+              רענן עכשיו
+            </button>
+            <p id="last-updated" class="last-updated">לא נטען עדיין</p>
+          </div>
+          <div class="session-controls">
+            <div id="auth-area" class="auth-area">
+              <form id="login-form" class="login-form">
+                <input
+                  type="text"
+                  name="nickname"
+                  placeholder="כינוי"
+                  autocomplete="nickname"
+                  required
+                />
+                <button type="submit">התחבר</button>
+              </form>
+              <p class="auth-hint">התחברו עם כינוי כדי להגיב</p>
+            </div>
+          </div>
+        </div>
+      </header>
+
+      <section id="status" class="status" role="status" aria-live="polite"></section>
+      <section id="news-list" class="news-list" aria-live="polite"></section>
+    </main>
+
+    <template id="news-item-template">
+      <article class="news-item">
+        <div class="news-meta">
+          <span class="news-source"></span>
+          <time class="news-time" dir="ltr"></time>
+        </div>
+        <div class="news-title-wrapper">
+          <a
+            class="news-title"
+            target="_blank"
+            rel="noopener noreferrer"
+            href="/"
+          ></a>
+          <div class="news-thumb" hidden>
+            <img alt="" />
+          </div>
+        </div>
+        <p class="news-description"></p>
+        <div class="news-actions" data-news-actions>
+          <div class="vote-buttons">
+            <button class="vote-btn like-btn" type="button">
+              👍
+              <span class="count">0</span>
+            </button>
+            <button class="vote-btn dislike-btn" type="button">
+              👎
+              <span class="count">0</span>
+            </button>
+          </div>
+          <button class="open-comments" type="button">
+            תגובות
+            <span class="comment-count">0</span>
+          </button>
+        </div>
+      </article>
+    </template>
+
+    <section id="comments-modal" class="comments-modal" hidden>
+      <div class="comments-modal__backdrop"></div>
+      <div class="comments-modal__panel" role="dialog" aria-modal="true">
+        <header class="comments-modal__header">
+          <div>
+            <p class="modal-source"></p>
+            <h2 class="modal-title"></h2>
+          </div>
+          <button type="button" class="modal-close" aria-label="סגור">×</button>
+        </header>
+        <ul class="modal-comment-list"></ul>
+        <p class="modal-auth-notice" hidden>
+          יש להתחבר עם כינוי כדי להוסיף תגובות.
+        </p>
+        <form class="modal-comment-form">
+          <input
+            type="text"
+            name="comment"
+            placeholder="הוסף תגובה..."
+            maxlength="180"
+            required
+          />
+          <button type="submit">שלח</button>
+        </form>
+      </div>
+    </section>
+
+    <script src="app.js"></script>
+  </body>
+</html>
